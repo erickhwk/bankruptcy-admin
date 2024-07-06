@@ -23,6 +23,7 @@ class LawsuitsController < ApplicationController
   def create
     @lawsuit = Lawsuit.new(lawsuit_params)
     @lawsuit.tenancy = Tenancy.find(current_user.tenancy_id)
+    @lawsuit.created_by = current_user.id
 
     respond_to do |format|
       if @lawsuit.save

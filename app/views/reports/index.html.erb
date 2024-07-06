@@ -18,10 +18,11 @@
         <table class="min-w-full divide-y divide-gray-300">
           <thead>
             <tr>
-              <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0">Criado em:</th>
+              <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0">Criado em</th>
               <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Processo</th>
               <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Título</th>
               <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Conteúdo</th>
+              <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Autor</th>
               <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Publicado?</th>
               <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"></th>              
             </tr>
@@ -33,6 +34,7 @@
                   <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"><%= report.lawsuit.alias %></td>
                   <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"><%= report.title.truncate(60) %></td>
                   <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"><%= report.content.truncate(60) %></td>
+                  <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"><%= report.created_by ? User.find(report.created_by).email : 'Desconhecido' %></td>
                   <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"><%= report.published ? 'Sim' : 'Rascunho' %></td>
                   <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                     <%= link_to "Show", report_path(report), class:"text-indigo-600 hover:text-indigo-900" %>

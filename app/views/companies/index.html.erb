@@ -22,6 +22,8 @@
               <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Razão Social</th>
               <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">CNPJ</th>
               <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Associado à</th>
+              <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Criado por</th>
+
               <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"></th>              
             </tr>
           </thead>
@@ -32,6 +34,8 @@
                   <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"><%= company.legal_name %></td>
                   <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"><%= company.cnpj %></td>
                   <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"><%= company.lawsuits.present? ? company.lawsuits.pluck(:alias).join(', ') : 'Sem associações' %></td>
+                  <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"><%= company.created_by ? User.find(company.created_by).email : 'Desconhecido' %></td>
+
                   <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                     <%= link_to "Show", company_path(company), class:"text-indigo-600 hover:text-indigo-900" %>
                     <%= link_to "Edit", edit_company_path(company), class:"text-indigo-600 hover:text-indigo-900 mx-2" %>

@@ -22,6 +22,7 @@
               <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Alias</th>
               <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Tipo</th>
               <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Empresas Associadas</th>
+              <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Criado por</th>
               <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"></th>              
             </tr>
           </thead>
@@ -32,6 +33,7 @@
                   <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"><%= lawsuit.alias %></td>
                   <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"><%= lawsuit.type_of.humanize %></td>
                   <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"><%= lawsuit.companies.present? ? lawsuit.companies.pluck(:legal_name).join(', ') : 'Sem associações' %></td>
+                  <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"><%= lawsuit.created_by ? User.find(lawsuit.created_by).email : 'Desconhecido' %></td>
                   <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                     <%= link_to "Show", lawsuit_path(lawsuit), class:"text-indigo-600 hover:text-indigo-900" %>
                     <%= link_to "Edit", edit_lawsuit_path(lawsuit), class:"text-indigo-600 hover:text-indigo-900 mx-2" %>
