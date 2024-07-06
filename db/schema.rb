@@ -10,9 +10,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_07_06_183452) do
+ActiveRecord::Schema[7.1].define(version: 2024_07_06_210353) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "companies", force: :cascade do |t|
+    t.string "legal_name"
+    t.string "cnpj"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "companies_lawsuits", id: false, force: :cascade do |t|
+    t.bigint "company_id", null: false
+    t.bigint "lawsuit_id", null: false
+    t.index ["company_id", "lawsuit_id"], name: "index_companies_lawsuits_on_company_id_and_lawsuit_id"
+    t.index ["lawsuit_id", "company_id"], name: "index_companies_lawsuits_on_lawsuit_id_and_company_id"
+  end
 
   create_table "lawsuits", force: :cascade do |t|
     t.bigint "tenancy_id", null: false

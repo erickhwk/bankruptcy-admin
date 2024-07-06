@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :companies
   resources :reports
   resources :lawsuits
   root 'pages#index'
