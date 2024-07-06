@@ -18,20 +18,20 @@
         <table class="min-w-full divide-y divide-gray-300">
           <thead>
             <tr>
+              <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0">Criado em</th>
               <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Razão Social</th>
               <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">CNPJ</th>
               <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Associado à</th>
-              <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0">Criado em</th>
               <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"></th>              
             </tr>
           </thead>
           <tbody class="divide-y divide-gray-200">
             <% @companies.each do |company| %>
                 <tr>
+                  <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-0"><%= company.created_at.strftime('%d/%m/%Y - %H:%M:%S') %></td>
                   <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"><%= company.legal_name %></td>
                   <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"><%= company.cnpj %></td>
-                  <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"><%= company.lawsuits.pluck(:alias).join(', ') %></td>
-                  <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-0"><%= company.created_at.strftime('%d/%m/%Y - %H:%M:%S') %></td>
+                  <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"><%= company.lawsuits.present? ? company.lawsuits.pluck(:alias).join(', ') : 'Sem associações' %></td>
                   <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                     <%= link_to "Show", company_path(company), class:"text-indigo-600 hover:text-indigo-900" %>
                     <%= link_to "Edit", edit_company_path(company), class:"text-indigo-600 hover:text-indigo-900 mx-2" %>

@@ -66,6 +66,6 @@ class LawsuitsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def lawsuit_params
-      params.require(:lawsuit).permit(:tenancy_id, :alias)
+      params.require(:lawsuit).permit(:tenancy_id, :alias, :type_of, company_ids: [])
     end
 end

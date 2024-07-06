@@ -15,6 +15,17 @@
     <%= form.text_field :alias, class: "block shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2 w-full" %>
   </div>
 
+  <div class="my-5">
+    <%= form.label :company_ids, "Companies" %>
+    <%= form.collection_select :company_ids, Company.all, :id, :legal_name, { include_blank: true, multiple: true }, class: "block shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2 w-full" %>
+  </div>
+
+  
+  <div class="my-5">
+    <%= form.label :type_of %>
+<%= form.collection_select :type_of, Lawsuit.type_ofs.keys, :to_s, :humanize, {}, class: "block shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2 w-full" %>
+  </div>
+
   <div class="inline">
     <%= form.submit class: "rounded-lg py-3 px-5 bg-blue-600 text-white inline-block font-medium cursor-pointer" %>
   </div>
