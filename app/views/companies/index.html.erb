@@ -18,7 +18,7 @@
         <table class="min-w-full divide-y divide-gray-300">
           <thead>
             <tr>
-              <% if current_user.role == 'super_admin' %>
+              <% if current_user.role == 'developer' %>
                 <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Cliente</th>
               <% end %>
               <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Criado em</th>
@@ -33,7 +33,7 @@
           <tbody class="divide-y divide-gray-200">
             <% @companies.each do |company| %>
                 <tr>
-                  <% if current_user.role == 'super_admin' %>
+                  <% if current_user.role == 'developer' %>
                     <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"><%= company.lawsuits.first.tenancy.name %></td>
                   <% end %>
                   <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"><%= company.created_at.strftime('%d/%m/%Y - %H:%M:%S') %></td>

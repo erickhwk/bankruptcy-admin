@@ -3,7 +3,7 @@ class CompaniesController < ApplicationController
 
   # GET /companies or /companies.json
   def index
-    return @companies = Company.all.reverse if current_user.role == 'super_admin'
+    return @companies = Company.all.reverse if current_user.role == 'developer'
     @companies = Company.joins(:lawsuits).where(lawsuits: {tenancy: current_user.tenancy}).reverse
   end
 
@@ -14,14 +14,14 @@ class CompaniesController < ApplicationController
   # GET /companies/new
   def new
     @company = Company.new
-    current_user.role == 'super_admin' ?
+    current_user.role == 'developer' ?
       @lawsuits = Lawsuit.all :
       @lawsuits = Lawsuit.where(tenancy: current_user.tenancy)
   end
 
   # GET /companies/1/edit
   def edit
-    current_user.role == 'super_admin' ?
+    current_user.role == 'developer' ?
     @lawsuits = Lawsuit.all :
     @lawsuits = Lawsuit.where(tenancy: current_user.tenancy)
   end
