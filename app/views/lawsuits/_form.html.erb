@@ -10,6 +10,7 @@
       </ul>
     </div>
   <% end %>
+
   <div class="my-5">
     <%= form.label :alias %>
     <%= form.text_field :alias, class: "block shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2 w-full" %>
@@ -23,8 +24,15 @@
   
   <div class="my-5">
     <%= form.label :type_of %>
-<%= form.collection_select :type_of, Lawsuit.type_ofs.keys, :to_s, :humanize, {}, class: "block shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2 w-full" %>
+    <%= form.collection_select :type_of, Lawsuit.type_ofs.keys, :to_s, :humanize, {}, class: "block shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2 w-full" %>
   </div>
+
+  <% if current_user.role == 'super_admin' %>
+    <div class="my-5">
+      <%= form.label :tenancy_id %>
+      <%= form.collection_select :tenancy_id, Tenancy.all, :id, :name, { include_blank: true }, class: "block shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2 w-full" %>
+    </div>
+  <% end %>
 
   <div class="inline">
     <%= form.submit class: "rounded-lg py-3 px-5 bg-blue-600 text-white inline-block font-medium cursor-pointer" %>

@@ -29,7 +29,7 @@ class LawsuitsController < ApplicationController
   # POST /lawsuits or /lawsuits.json
   def create
     @lawsuit = Lawsuit.new(lawsuit_params)
-    @lawsuit.tenancy = Tenancy.find(current_user.tenancy_id)
+    @lawsuit.tenancy = Tenancy.find(current_user.tenancy_id) if current_user.role != 'super_admin'
     @lawsuit.created_by = current_user.id
 
     respond_to do |format|
@@ -74,6 +74,6 @@ class LawsuitsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def lawsuit_params
-      params.require(:lawsuit).permit(:tenancy_id, :alias, :type_of, company_ids: [])
+      params.require(:lawsuit).permit(:tenancy_id, :alias, :type_of, :tenancy_id, company_ids: [])
     end
 end
