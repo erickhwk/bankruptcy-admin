@@ -12,7 +12,9 @@
   </head>
 
   <body class="h-full">
-    <%= render "shared/sidebar" %>
+    <% if user_signed_in? %>
+      <%= render "shared/sidebar" %>
+    <% end %>
     <main class="py-10 lg:pl-72">
       <div class="px-4 sm:px-6 lg:px-8">
         <p class="notice"><%= notice %></p>
