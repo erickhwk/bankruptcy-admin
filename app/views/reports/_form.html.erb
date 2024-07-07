@@ -13,7 +13,7 @@
 
   <div class="my-5">
     <%= form.label :lawsuit_id %>
-    <%= form.collection_select :lawsuit_id, Lawsuit.all, :id, :alias, { include_blank: true }, class: "block shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2 w-full" %>
+    <%= form.collection_select :lawsuit_id, @lawsuits, :id, :alias, { include_blank: true }, class: "block shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2 w-full" %>
   </div>
 
   <div class="my-5">

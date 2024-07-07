@@ -3,7 +3,8 @@ class LawsuitsController < ApplicationController
 
   # GET /lawsuits or /lawsuits.json
   def index
-    @lawsuits = Lawsuit.all
+    return @lawsuits = Lawsuit.all.reverse if current_user.role == 'super_admin'
+    @lawsuits = Lawsuit.where(tenancy_id: current_user.tenancy_id).reverse
   end
 
   # GET /lawsuits/1 or /lawsuits/1.json
@@ -13,10 +14,16 @@ class LawsuitsController < ApplicationController
   # GET /lawsuits/new
   def new
     @lawsuit = Lawsuit.new
+    current_user.role == 'super_admin' ?
+      @companies = Company.all :
+      @companies = Company.joins(:lawsuits).where(lawsuits: {tenancy: current_user.tenancy})
   end
 
   # GET /lawsuits/1/edit
   def edit
+    current_user.role == 'super_admin' ?
+    @companies = Company.all :
+    @companies = Company.joins(:lawsuits).where(lawsuits: {tenancy: current_user.tenancy})
   end
 
   # POST /lawsuits or /lawsuits.json

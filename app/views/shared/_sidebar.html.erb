@@ -193,16 +193,20 @@
             </ul>
           </li>
           <li>
-            <div class="text-xs font-semibold leading-6 text-gray-400">Meu Escritório</div>
-            <ul role="list" class="-mx-2 mt-2 space-y-1">
-              <li>
-                <!-- Current: "bg-gray-50 text-cyan-950", Default: "text-white hover:text-cyan-950 hover:bg-gray-50" -->
-                <a href="#" class="group flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-white hover:bg-gray-50 hover:text-cyan-950">
-                  <span class="flex h-6 w-6 shrink-0 items-center justify-center rounded-lg border border-gray-200 bg-white text-[0.625rem] font-medium text-gray-400 group-hover:border-indigo-600 group-hover:text-cyan-950"><%= current_user.tenancy.name.capitalize[0] %></span>
-                  <span class="truncate"><%= current_user.tenancy.name %></span>
-                </a>
-              </li>
-            </ul>
+            <% if current_user.tenancy %>
+              <div class="text-xs font-semibold leading-6 text-gray-400">Meu Escritório</div>
+              <ul role="list" class="-mx-2 mt-2 space-y-1">
+                <li>
+                  <!-- Current: "bg-gray-50 text-cyan-950", Default: "text-white hover:text-cyan-950 hover:bg-gray-50" -->
+
+                    <a href="#" class="group flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-white hover:bg-gray-50 hover:text-cyan-950">
+                      <span class="flex h-6 w-6 shrink-0 items-center justify-center rounded-lg border border-gray-200 bg-white text-[0.625rem] font-medium text-gray-400 group-hover:border-indigo-600 group-hover:text-cyan-950"><%= current_user.tenancy.name.capitalize[0] %></span>
+                      <span class="truncate"><%= current_user.tenancy.name %></span>
+                    </a>
+
+                </li>
+              </ul>
+            <% end %>
           </li>
           <li class="-mx-6 mt-auto flex items-center justify-between">
             <a href="#" class="w-full flex items-center px-6 py-3 text-sm font-semibold leading-6 text-white hover:bg-cyan-800">

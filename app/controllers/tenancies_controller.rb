@@ -1,5 +1,6 @@
 class TenanciesController < ApplicationController
   before_action :set_tenancy, only: %i[ show edit update destroy ]
+  before_action :check_if_tenancy_exists, only: %i[ new create ]
 
   # GET /tenancies or /tenancies.json
   def index
@@ -25,6 +26,7 @@ class TenanciesController < ApplicationController
 
     respond_to do |format|
       if @tenancy.save
+        current_user.update(tenancy_id: @tenancy.id)
         format.html { redirect_to tenancy_url(@tenancy), notice: "Tenancy was successfully created." }
         format.json { render :show, status: :created, location: @tenancy }
       else
@@ -58,6 +60,11 @@ class TenanciesController < ApplicationController
   end
 
   private
+
+    def check_if_tenancy_exists
+      redirect_to root_path if current_user.tenancy
+    end
+
     # Use callbacks to share common setup or constraints between actions.
     def set_tenancy
       @tenancy = Tenancy.find(params[:id])

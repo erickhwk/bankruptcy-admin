@@ -3,7 +3,8 @@ class ReportsController < ApplicationController
 
   # GET /reports or /reports.json
   def index
-    @reports = Report.all.order(created_at: :desc)
+    return @reports = Report.all.reverse  if current_user.role == 'super_admin'
+    @reports = Report.joins(:lawsuit).where(lawsuits: { tenancy_id: current_user.tenancy_id }).reverse
   end
 
   # GET /reports/1 or /reports/1.json
@@ -13,10 +14,16 @@ class ReportsController < ApplicationController
   # GET /reports/new
   def new
     @report = Report.new
+    current_user.role == 'super_admin' ?
+      @lawsuits = Lawsuit.all :
+      @lawsuits = Lawsuit.where(tenancy: current_user.tenancy)
   end
 
   # GET /reports/1/edit
   def edit
+    current_user.role == 'super_admin' ?
+    @lawsuits = Lawsuit.all :
+    @lawsuits = Lawsuit.where(tenancy: current_user.tenancy)
   end
 
   # POST /reports or /reports.json

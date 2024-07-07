@@ -8,8 +8,8 @@
   <div class="divide-y divide-gray-200 overflow-hidden rounded-lg bg-white shadow mt-6">
     <div class="px-4 py-5 sm:px-6 bg-cyan-950">
       <div class="-ml-4 -mt-2 flex flex-wrap items-center justify-between sm:flex-nowrap">
-        <div class="ml-4 mt-2">
-          <h3 class="text-base font-semibold leading-6 text-slate-200">Últimos Informes</h3>
+        <div class="ml-4 mt-2 flex gap-4 items-center">
+          <h3 class="text-base font-semibold leading-6 text-slate-200">Últimos Informes Publicados</h3><%= link_to "Ver todos", reports_path, class:"text-sm text-slate-200" %>
         </div>
         <div class="ml-4 mt-2 flex-shrink-0">
           <%= link_to new_report_path, class:"rounded-full bg-teal-400 p-1 text-white shadow-sm hover:bg-teal-600 block" do %>
@@ -28,8 +28,8 @@
   <div class="divide-y divide-gray-200 overflow-hidden rounded-lg bg-white shadow mt-6">
     <div class="px-4 py-5 sm:px-6 bg-cyan-950">
       <div class="-ml-4 -mt-2 flex flex-wrap items-center justify-between sm:flex-nowrap">
-        <div class="ml-4 mt-2">
-          <h3 class="text-base font-semibold leading-6 text-slate-200">Últimos Processos</h3>
+        <div class="ml-4 mt-2 flex gap-4 items-center">
+          <h3 class="text-base font-semibold leading-6 text-slate-200">Últimos Processos</h3><%= link_to "Ver todos", lawsuits_path, class:"text-sm text-slate-200" %>
         </div>
         <div class="ml-4 mt-2 flex-shrink-0">
           <%= link_to new_lawsuit_path, class:"rounded-full bg-teal-400 p-1 text-white shadow-sm hover:bg-teal-600 block" do %>
@@ -48,8 +48,8 @@
   <div class="divide-y divide-gray-200 overflow-hidden rounded-lg bg-white shadow mt-6">
     <div class="px-4 py-5 sm:px-6 bg-cyan-950">
       <div class="-ml-4 -mt-2 flex flex-wrap items-center justify-between sm:flex-nowrap">
-        <div class="ml-4 mt-2">
-          <h3 class="text-base font-semibold leading-6 text-slate-200">Últimas Empresas</h3>
+        <div class="ml-4 mt-2 flex gap-4 items-center">
+          <h3 class="text-base font-semibold leading-6 text-slate-200">Últimas Empresas</h3><%= link_to "Ver todas", companies_path, class:"text-sm text-slate-200" %>
         </div>
         <div class="ml-4 mt-2 flex-shrink-0">
           <%= link_to new_company_path, class:"rounded-full bg-teal-400 p-1 text-white shadow-sm hover:bg-teal-600 block" do %>

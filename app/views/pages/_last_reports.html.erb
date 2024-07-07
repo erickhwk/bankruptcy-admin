@@ -3,18 +3,21 @@
     <table class="min-w-full divide-y divide-gray-300">
       <thead>
         <tr>
+          <% if current_user.role == 'super_admin' %>
+            <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Cliente</th>
+          <% end %>
           <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Título</th>
-          <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Processo</th>
-          <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Publicado?</th>             
+          <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Processo</th>           
         </tr>
       </thead>
       <tbody class="divide-y divide-gray-200">
         <% @reports.each do |report| %>
             <tr>
+              <% if current_user.role == 'super_admin' %>
+                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"><%= report.lawsuit.tenancy.name %></td>
+              <% end %>
               <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"><%= report.title.truncate(60) %></td>
               <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"><%= report.lawsuit.alias %></td>
-              <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"><%= report.published ? 'Sim' : 'Rascunho' %></td>
-
             </tr>
         <% end %>
       </tbody>

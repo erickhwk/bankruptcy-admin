@@ -8,4 +8,6 @@ class Lawsuit < ApplicationRecord
     :judicial_recovery => "recuperação judicial",
     :management => "gestão"
   }
+
+  scope :latest, -> { limit(10).reverse }
 end

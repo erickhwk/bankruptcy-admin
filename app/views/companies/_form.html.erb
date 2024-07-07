@@ -23,7 +23,7 @@
   
   <div class="my-5">
     <%= form.label :lawsuit_ids, "Lawsuits" %>
-    <%= form.collection_select :lawsuit_ids, Lawsuit.all, :id, :alias, { include_blank: true, multiple: true }, class: "block shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2 w-full" %>
+    <%= form.collection_select :lawsuit_ids, @lawsuits, :id, :alias, { include_blank: true, multiple: true }, class: "block shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2 w-full" %>
   </div>
 
   <div class="inline">

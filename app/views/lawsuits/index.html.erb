@@ -18,7 +18,10 @@
         <table class="min-w-full divide-y divide-gray-300">
           <thead>
             <tr>
-              <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0">Criado em</th>
+              <% if current_user.role == 'super_admin' %>
+                <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Cliente</th>
+              <% end %>
+              <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Criado em</th>
               <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Alias</th>
               <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Tipo</th>
               <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Empresas Associadas</th>
@@ -29,7 +32,10 @@
           <tbody class="divide-y divide-gray-200">
             <% @lawsuits.each do |lawsuit| %>
                 <tr>
-                  <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-0"><%= lawsuit.created_at.strftime('%d/%m/%Y - %H:%M:%S') %></td>
+                  <% if current_user.role == 'super_admin' %>
+                    <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"><%= lawsuit.tenancy.name %></td>
+                  <% end %>
+                  <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"><%= lawsuit.created_at.strftime('%d/%m/%Y - %H:%M:%S') %></td>
                   <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"><%= lawsuit.alias %></td>
                   <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"><%= lawsuit.type_of.humanize %></td>
                   <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"><%= lawsuit.companies.present? ? lawsuit.companies.pluck(:legal_name).join(', ') : 'Sem associações' %></td>
