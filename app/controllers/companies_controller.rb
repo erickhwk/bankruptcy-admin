@@ -1,5 +1,6 @@
 class CompaniesController < ApplicationController
   before_action :set_company, only: %i[ show edit update destroy ]
+  before_action :check_if_theres_lawsuits, only: %i[new create]
 
   # GET /companies or /companies.json
   def index
@@ -66,6 +67,10 @@ class CompaniesController < ApplicationController
   end
 
   private
+
+  def check_if_theres_lawsuits
+    redirect_to new_lawsuit_path, alert: 'Não existem processos para associar a uma empresa. Por favor, crie seu primeiro processo.' if Lawsuit.where(tenancy: current_user.tenancy).empty?
+  end
     # Use callbacks to share common setup or constraints between actions.
     def set_company
       @company = Company.find(params[:id])

@@ -1,5 +1,6 @@
 class ReportsController < ApplicationController
   before_action :set_report, only: %i[ show edit update destroy ]
+  before_action :check_if_theres_lawsuits, only: %i[new create]
 
   # GET /reports or /reports.json
   def index
@@ -67,6 +68,9 @@ class ReportsController < ApplicationController
   end
 
   private
+    def check_if_theres_lawsuits
+      redirect_to new_lawsuit_path, alert: 'Não existem processos para associar a um informe. Por favor, crie seu primeiro processo.' if Lawsuit.where(tenancy: current_user.tenancy).empty?
+    end
     # Use callbacks to share common setup or constraints between actions.
     def set_report
       @report = Report.find(params[:id])
