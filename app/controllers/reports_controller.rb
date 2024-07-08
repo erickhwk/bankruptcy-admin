@@ -46,8 +46,12 @@ class ReportsController < ApplicationController
 
   # PATCH/PUT /reports/1 or /reports/1.json
   def update
+    if params[:report][:files].present?
+      @report.files.attach(params[:report][:files])
+    end
+
     respond_to do |format|
-      if @report.update(report_params)
+      if @report.update(report_params.except(:files))
         format.html { redirect_to report_url(@report), notice: "Report was successfully updated." }
         format.json { render :show, status: :ok, location: @report }
       else
@@ -67,9 +71,18 @@ class ReportsController < ApplicationController
     end
   end
 
+  def remove_file
+    report = Report.find(params[:id])
+    report.files.find(params[:file]).purge
+
+    redirect_to report_path(report), notice: 'File was successfully removed.'
+  end
+
   private
     def check_if_theres_lawsuits
-      redirect_to new_lawsuit_path, alert: 'Não existem processos para associar a um informe. Por favor, crie seu primeiro processo.' if Lawsuit.where(tenancy: current_user.tenancy).empty?
+      unless current_user.role == 'developer'
+        redirect_to new_lawsuit_path, alert: 'Não existem processos para associar a um informe. Por favor, crie seu primeiro processo.' if Lawsuit.where(tenancy: current_user.tenancy).empty?
+      end
     end
     # Use callbacks to share common setup or constraints between actions.
     def set_report
@@ -78,6 +91,6 @@ class ReportsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def report_params
-      params.require(:report).permit(:title, :content, :published, :lawsuit_id)
+      params.require(:report).permit(:title, :content, :published, :lawsuit_id, files: [])
     end
 end

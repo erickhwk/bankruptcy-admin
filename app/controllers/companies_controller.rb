@@ -69,7 +69,9 @@ class CompaniesController < ApplicationController
   private
 
   def check_if_theres_lawsuits
-    redirect_to new_lawsuit_path, alert: 'Não existem processos para associar a uma empresa. Por favor, crie seu primeiro processo.' if Lawsuit.where(tenancy: current_user.tenancy).empty?
+    unless current_user.role == 'developer'
+      redirect_to new_lawsuit_path, alert: 'Não existem processos para associar a uma empresa. Por favor, crie seu primeiro processo.' if Lawsuit.where(tenancy: current_user.tenancy).empty?
+    end
   end
     # Use callbacks to share common setup or constraints between actions.
     def set_company

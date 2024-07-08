@@ -25,7 +25,7 @@
               <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Título</th>
               <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Conteúdo</th>
               <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Autor</th>
-              <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Publicado?</th>
+              <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Status</th>
               <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"></th>              
             </tr>
           </thead>
@@ -38,9 +38,9 @@
                   <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"><%= report.created_at.strftime('%d/%m/%Y - %H:%M:%S') %></td>
                   <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"><%= report.lawsuit.alias %></td>
                   <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"><%= report.title.truncate(60) %></td>
-                  <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"><%= report.content.truncate(60) %></td>
+                  <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"><%= report.content.to_plain_text.truncate(60) %></td>
                   <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"><%= report.created_by ? User.find(report.created_by).email : 'Desconhecido' %></td>
-                  <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"><%= report.published ? 'Sim' : 'Rascunho' %></td>
+                  <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"><%= report.published ? 'Publicado' : 'Rascunho' %></td>
                   <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                     <%= link_to "Show", report_path(report), class:"text-indigo-600 hover:text-indigo-900" %>
                     <%= link_to "Edit", edit_report_path(report), class:"text-indigo-600 hover:text-indigo-900 mx-2" %>

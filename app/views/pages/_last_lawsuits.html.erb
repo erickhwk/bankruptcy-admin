@@ -1,26 +1,24 @@
-<div class="px-4 sm:px-6 lg:px-8">
-  <div class="inline-block min-w-full py-2 align-middle">
-    <table class="min-w-full divide-y divide-gray-300">
-      <thead>
-        <tr>
-          <% if current_user.role == 'developer' %>
-            <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Cliente</th>
-          <% end %>
-          <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Alias</th>
-          <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Tipo</th>             
-        </tr>
-      </thead>
-      <tbody class="divide-y divide-gray-200">
-        <% @lawsuits.each do |lawsuit| %>
-            <tr>
-              <% if current_user.role == 'developer' %>
-                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"><%= lawsuit.tenancy.name %></td>
-              <% end %>
-              <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"><%= lawsuit.alias %></td>
-              <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"><%= lawsuit.type_of.humanize %></td>
-            </tr>
+<div class="inline-block min-w-full py-2 align-middle">
+  <table class="min-w-full divide-y divide-gray-300">
+    <thead>
+      <tr>
+        <% if current_user.role == 'developer' %>
+          <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Cliente</th>
         <% end %>
-      </tbody>
-    </table>
-  </div>
+        <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Alias</th>
+        <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Tipo</th>             
+      </tr>
+    </thead>
+    <tbody class="divide-y divide-gray-200">
+      <% @lawsuits.each do |lawsuit| %>
+          <tr>
+            <% if current_user.role == 'developer' %>
+              <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"><%= lawsuit.tenancy.name %></td>
+            <% end %>
+            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"><%= lawsuit.alias %></td>
+            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"><%= lawsuit.type_of.humanize %></td>
+          </tr>
+      <% end %>
+    </tbody>
+  </table>
 </div>
