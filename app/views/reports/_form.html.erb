@@ -23,7 +23,7 @@
 
   <div class="my-5">
     <%= form.label :content %>
-    <%= form.text_area :content, rows: 4, class: "block shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2 w-full" %>
+    <%= form.rich_text_area :content, rows: 4, class: "block shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2 w-full" %>
   </div>
 
   <div class="my-5">
@@ -31,7 +31,28 @@
     <%= form.check_box :published, class: "block mt-2 h-5 w-5" %>
   </div>
 
+  <div class="my-5">
+    <%= form.file_field :files, multiple: true, include_hidden: false %>
+  </div>
+
+  <% if report.files.attached? %>
+    <ul>
+      <% report.files.each do |file| %>
+        <li>
+          <div class="m-4 flex gap-3 items-center">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+              <path stroke-linecap="round" stroke-linejoin="round" d="m18.375 12.739-7.693 7.693a4.5 4.5 0 0 1-6.364-6.364l10.94-10.94A3 3 0 1 1 19.5 7.372L8.552 18.32m.009-.01-.01.01m5.699-9.941-7.81 7.81a1.5 1.5 0 0 0 2.112 2.13" />
+            </svg>
+            <b><%= file.filename %></b>
+          </div>
+        </li>
+      <% end %>
+    </ul>
+  <% end %>
+
   <div class="inline">
     <%= form.submit class: "rounded-lg py-3 px-5 bg-blue-600 text-white inline-block font-medium cursor-pointer" %>
   </div>
+
+
 <% end %>

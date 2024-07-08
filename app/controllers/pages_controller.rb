@@ -1,10 +1,10 @@
 class PagesController < ApplicationController
   def index
-    unless current_user.role == 'super_admin'
+    unless current_user.role == 'developer'
       redirect_to new_tenancy_path if current_user.tenancy_id.nil?
     end
 
-    unless current_user.role == 'super_admin'
+    unless current_user.role == 'developer'
       @reports = Report.joins(:lawsuit).where(lawsuits: { tenancy_id: current_user.tenancy_id }).published.latest
       @lawsuits = Lawsuit.where(tenancy_id: current_user.tenancy_id).latest
       @companies = Company.joins(:lawsuits).where(lawsuits: { tenancy_id: current_user.tenancy_id }).latest
@@ -17,7 +17,7 @@ class PagesController < ApplicationController
 
   def team
 
-    return @team = User.where(tenancy_id: current_user.tenancy_id) unless current_user.role == 'super_admin'
+    return @team = User.where(tenancy_id: current_user.tenancy_id) unless current_user.role == 'developer'
     @team = User.all
   end
 end

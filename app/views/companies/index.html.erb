@@ -6,7 +6,6 @@
   <div class="sm:flex sm:items-center">
     <div class="sm:flex-auto">
       <h1 class="font-bold text-4xl">Empresas</h1>
-      <p class="mt-2 text-sm text-gray-700">Uma lista com todas as empresas arroladas nos processos.</p>
     </div>
     <div class="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
       <%= link_to "Nova Empresa", new_company_path, class: "block rounded-md bg-cyan-950 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-cyan-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal-300" %>
@@ -18,13 +17,13 @@
         <table class="min-w-full divide-y divide-gray-300">
           <thead>
             <tr>
-              <% if current_user.role == 'super_admin' %>
+              <% if current_user.role == 'developer' %>
                 <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Cliente</th>
               <% end %>
               <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Criado em</th>
               <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Razão Social</th>
               <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">CNPJ</th>
-              <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Associado à</th>
+              <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Processo(s)</th>
               <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Criado por</th>
 
               <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"></th>              
@@ -33,7 +32,7 @@
           <tbody class="divide-y divide-gray-200">
             <% @companies.each do |company| %>
                 <tr>
-                  <% if current_user.role == 'super_admin' %>
+                  <% if current_user.role == 'developer' %>
                     <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"><%= company.lawsuits.first.tenancy.name %></td>
                   <% end %>
                   <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500"><%= company.created_at.strftime('%d/%m/%Y - %H:%M:%S') %></td>

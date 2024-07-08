@@ -1,6 +1,11 @@
 Rails.application.routes.draw do
   resources :companies
-  resources :reports
+  resources :reports do
+    member do
+      delete :remove_file
+    end
+  end
+
   resources :lawsuits
   root 'pages#index'
 
