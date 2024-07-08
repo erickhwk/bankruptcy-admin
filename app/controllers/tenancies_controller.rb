@@ -26,7 +26,7 @@ class TenanciesController < ApplicationController
 
     respond_to do |format|
       if @tenancy.save
-        current_user.update(tenancy_id: @tenancy.id)
+        current_user.update(tenancy_id: @tenancy.id) unless current_user.role == 'developer'          
         format.html { redirect_to tenancy_url(@tenancy), notice: "Tenancy was successfully created." }
         format.json { render :show, status: :created, location: @tenancy }
       else
